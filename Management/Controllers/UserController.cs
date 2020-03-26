@@ -37,7 +37,7 @@ namespace Management.Controllers
                                      orderby p.CreatedOn descending
                                      select new
                                      {
-                                         UserId = p.UserId,
+                                         UserId = p.Id,
                                          Name = p.Name,
                                          LoginName = p.LoginName,
                                          State = p.State,
@@ -188,7 +188,7 @@ namespace Management.Controllers
                 }
 
                 var Users = (from p in db.Users
-                             where p.UserId == user.UserId
+                             where p.Id == user.UserId
                              && (p.State != 9)
                              select p).SingleOrDefault();
 
@@ -261,7 +261,7 @@ namespace Management.Controllers
                 }
 
                 var User = (from p in db.Users
-                            where p.UserId == UserId && p.State != 9
+                            where p.Id == UserId && p.State != 9
                             select p).SingleOrDefault();
 
                 if (User == null)
@@ -292,7 +292,7 @@ namespace Management.Controllers
                 }
 
                 var User = (from p in db.Users
-                            where p.UserId == UserId && p.State != 9
+                            where p.Id == UserId && p.State != 9
                             select p).SingleOrDefault();
 
                 if (User == null)
@@ -323,7 +323,7 @@ namespace Management.Controllers
                 }
 
                 var User = (from p in db.Users
-                            where p.UserId == UserId && p.State != 9
+                            where p.Id == UserId && p.State != 9
                             select p).SingleOrDefault();
 
                 if (User == null)
@@ -347,7 +347,7 @@ namespace Management.Controllers
             try
             {
                 var UserImage = (from p in db.Users
-                                 where p.UserId == UserId
+                                 where p.Id == UserId
                                  select p.Image).SingleOrDefault();
 
                 if (UserImage == null)
@@ -373,7 +373,7 @@ namespace Management.Controllers
                 return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
             }
             var Users = (from p in db.Users
-                         where p.UserId == user.UserId
+                         where p.Id == user.UserId
                          && (p.State == 1 || p.State == 2)
                          select p).SingleOrDefault();
 
@@ -403,7 +403,7 @@ namespace Management.Controllers
                 }
 
                 var Users = (from p in db.Users
-                             where p.UserId == userId
+                             where p.Id == userId
                              && (p.State != 9)
                              select p).SingleOrDefault();
 

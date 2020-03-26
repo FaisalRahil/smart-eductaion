@@ -166,7 +166,7 @@ namespace Management.Controllers
 
                 var userInfo = new
                 {
-                    userId = cUser.UserId,
+                    userId = cUser.Id,
                     fullName = cUser.Name,
                     LoginName = cUser.LoginName,
                     DateOfBirth = cUser.BirthDate,
@@ -182,7 +182,7 @@ namespace Management.Controllers
                 //const string Issuer = "http://www.nid.ly";
                 const string Issuer = "http://localhost:4810";
                 var claims = new List<Claim>();
-                claims.Add(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/id", cUser.UserId.ToString(), ClaimValueTypes.Integer64, Issuer));
+                claims.Add(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/id", cUser.Id.ToString(), ClaimValueTypes.Integer64, Issuer));
                 claims.Add(new Claim(ClaimTypes.Name, cUser.Name, ClaimValueTypes.String, Issuer));
                //  claims.Add(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/OfficeId", cUser.OfficeId.ToString(), ClaimValueTypes.Integer64, Issuer));
                //claims.Add(new Claim("userType", cUser.UserType.ToString(), ClaimValueTypes.Integer32, Issuer));
@@ -235,7 +235,7 @@ namespace Management.Controllers
                 if (loginUser.Password != null)
                 {
                     var User = (from p in db.Users
-                                where p.UserId == userId && p.State != 9
+                                where p.Id == userId && p.State != 9
                                 select p).SingleOrDefault();
 
                     if (Security.VerifyHash(loginUser.Password, User.Password, HashAlgorithms.SHA512))
@@ -261,7 +261,7 @@ namespace Management.Controllers
                 else
                 {
                     var User = (from p in db.Users
-                                where p.UserId == loginUser.UserId && p.State != 9
+                                where p.Id == loginUser.UserId && p.State != 9
                                 select p).SingleOrDefault();
                     if (User == null)
                     {
@@ -286,7 +286,7 @@ namespace Management.Controllers
         public IActionResult GetUserImage(long userId)
         {
             var userimage = (from p in db.Users
-                             where p.UserId == userId
+                             where p.Id == userId
                              select p.Image).SingleOrDefault();
 
             return File(userimage, "image/jpg");
@@ -351,11 +351,11 @@ namespace Management.Controllers
 
                 mail.To.Add(email);
 
-                string confirm = Security.ComputeHash(user.UserId.ToString() + "@cra.gov.ly", HashAlgorithms.SHA512, null);
+                string confirm = Security.ComputeHash(user.Id.ToString() + "@cra.gov.ly", HashAlgorithms.SHA512, null);
 
                 mail.Subject = "مصلحة الاحوال المدنية - إعادة تعيين كلمة المرور";
 
-                mail.Body = GetResetPasswordHTML(user.Name, "/security/AccountActivate?confirm=" + user.UserId.ToString() + "&account=" + Security.EncryptBase64(confirm));
+                mail.Body = GetResetPasswordHTML(user.Name, "/security/AccountActivate?confirm=" + user.Id.ToString() + "&account=" + Security.EncryptBase64(confirm));
 
                 mail.IsBodyHtml = true;
 
@@ -397,7 +397,7 @@ namespace Management.Controllers
                 }
 
                 var user = (from u in db.Users
-                            where u.UserId == userActivate.confirm
+                            where u.Id == userActivate.confirm
                             select u).SingleOrDefault();
 
                 if (user == null)
