@@ -1,4 +1,4 @@
-﻿<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-primary navbar-dark headroom">
+﻿<nav id="navbar-main" :class="NavBar">
     <div class="container">
         <a class="navbar-brand mr-lg-5" href="./index.html">
             <img src="/assets/img/brand/white.png">
@@ -23,6 +23,14 @@
                 </div>
             </div>
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center ml-lg-auto">
+                <li class="nav-item">
+                    
+                    <a href="#" @click.prevent="href('/',0)" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <span class="nav-link-inner--text">Home</span>
+                    </a>
+                </li>
+
                 <li class="nav-item dropdown">
                     <a href="javascript:;" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-ui-04 d-lg-none"></i>
@@ -165,12 +173,34 @@
                         </a>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a href="#" @click.prevent="href('/Login',1)" class="nav-link" data-toggle="dropdown" role="button" style="font-weight:bold">
+                        <i class="ni ni-ui-04 d-lg-none" ></i>
+                        Login
+                        </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" @click.prevent="href('/SignUp',0)" class="nav-link" data-toggle="dropdown" role="button" style="font-weight:bold">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        SignUp
+                        </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a href="javascript:;" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-tablet-button d-lg-none"></i>
-                        <span class="nav-link-inner--text">App Pages</span>
+                        <div class="demo-basic--circle">
+                            <div class="block" key="large">
+                                <el-avatar size="large" :src="circleUrl"></el-avatar>
+                            </div>
+                        </div>
+                        <!--<div class="sub-title">User Name</div>-->
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="./examples/account-settings.html">
+                            <i class="fa fa-user text-muted" style="font-weight:bold"></i>
+                            Abdullah Elamir
+                        </a>
                         <a class="dropdown-item" href="./examples/account-settings.html">
                             <i class="ni ni-lock-circle-open text-muted"></i>
                             Account Settings

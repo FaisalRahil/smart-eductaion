@@ -6,7 +6,10 @@ import Vuetify from 'vuetify'
 import locale from 'element-ui/lib/locale/lang/en'
 import BlockUIService from './Shared/BlockUIService.js';
 import Layout from './Components/Layout/Layout.vue';
+import Login from './Components/Login/Login.vue';
+import SignUp from './Components/SignUp/SignUp.vue';
 import Home from './Components/Home/Home.vue';
+
 /*import Students from './Components/Students/Students.vue';
 import Companies from './Components/Companies/Companies.vue';
 import Packages from './Components/Packages/Packages.vue';
@@ -47,6 +50,8 @@ const router = new VueRouter({
     linkActiveClass: 'active',
     routes: [
         { path: '/', component: Home }, 
+        { path: '/Login', component: Login }, 
+        { path: '/SignUp', component: SignUp }
         ]
 
 });
