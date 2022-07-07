@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "element-ui": "2.13.0",
-    "moment": "^2.15.2",
+    "moment": "^2.29.4",
     "normalize.css": "^7.0.0",
     "rtlcss-loader": "^1.0.2",
     "sweetalert": "2.1.0",
